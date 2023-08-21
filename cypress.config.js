@@ -1,7 +1,6 @@
 const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   reporter: "cypress-mochawesome-reporter",
-  //test
   reporterOptions: {
     charts: false,
     reportPageTitle: "Project API Detail Report",
