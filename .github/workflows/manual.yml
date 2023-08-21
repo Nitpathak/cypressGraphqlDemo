@@ -1,0 +1,46 @@
+# Define the name of the GitHub Actions workflow
+name: Cypress Automation Tests
+
+# Define the triggers for the workflow
+on:
+  # Trigger the workflow on push events to the main branch
+  push:
+    branches:
+      - main
+  # Schedule the workflow to run every day at 10 AM
+  schedule:
+    - cron: "0 10 * * *"
+
+# Define the jobs to be executed in the workflow
+jobs:
+  # Define the "cypress" job
+  cypress:
+    # Define the operating system environment for the job
+    runs-on: ubuntu-latest
+
+    # Define the steps to be executed in the job
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      # Step 3: Install project dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Run Cypress tests
+      - name: Run Cypress Tests
+        run: npx cypress run
+
+      # Step 4: Upload Cypress tests reports
+      - name: Upload Cypress tests reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: OBSBackend-report-summary
+          path: cypress/reports/html/index.html
