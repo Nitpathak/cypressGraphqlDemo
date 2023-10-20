@@ -9,7 +9,7 @@ on:
       - main
   # Schedule the workflow to run every day at 10 AM
   schedule:
-    - cron: "0 11 * * *"
+    - cron: "0 12 * * *"
 
 # Define the jobs to be executed in the workflow
 jobs:
